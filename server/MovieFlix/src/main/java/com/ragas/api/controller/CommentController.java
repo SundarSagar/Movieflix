@@ -9,34 +9,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ragas.api.entity.Employee;
-import com.ragas.api.service.EmployeeService;
+import com.ragas.api.entity.Comment;
+import com.ragas.api.service.CommentService;
 
 @RestController
-@RequestMapping(value = "employees")
-public class EmployeeController {
+@RequestMapping(value = "comments")
+public class CommentController {
 
 	@Autowired
-	private EmployeeService service;
+	private CommentService service;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Employee> findAll() {
+	public List<Comment> findAll() {
 		return service.findAll();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "{id}")
-	public Employee findOne(@PathVariable("id") String empId) {
-		return service.findOne(empId);
+	public Comment findOne(@PathVariable("id") String cId) {
+		return service.findOne(cId);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Employee create(@RequestBody Employee emp) {
-		return service.create(emp);
+	public Comment create(@RequestBody Comment c) {
+		return service.create(c);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "{id}")
-	public Employee update(@PathVariable("id") String id, @RequestBody Employee emp) {
-		return service.update(id, emp);
+	public Comment update(@PathVariable("id") String id, @RequestBody Comment c) {
+		return service.update(id, c);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "{id}")
