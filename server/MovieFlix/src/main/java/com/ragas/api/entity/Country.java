@@ -2,10 +2,8 @@ package com.ragas.api.entity;
 
 
 import java.util.List;
-//import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,24 +18,28 @@ import javax.persistence.Table;
 @Table
 @NamedQueries({ 
 	@NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c"), 
-	@NamedQuery(name = "Country.findByName", query = "SELECT c FROM Country c WHERE c.name=:pCountryName")
+	@NamedQuery(name = "Country.findByName", query = "SELECT c FROM Country c WHERE c.name=:pName")
 })
 public class Country {
 	
 	@Id
-	@Column(name = "Country_id")
 	private String id;
 	
 	@Column(unique=true)
-	private String countryName;
+	private String name;
 	
-	@ManyToMany(mappedBy = "countrys",cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "countrys")
 	 private List<Movie> movies;
 	
 	public Country() {
 		this.id = UUID.randomUUID().toString();
 	}
 	
+	public Country(String name){
+		this();
+		this.setName(name);
+		
+	}
 	
 	public String getId() {
 		return id;
@@ -56,12 +58,12 @@ public class Country {
 		this.movies = movies;
 	}
 
-	public String getcountryName() {
-		return countryName;
+	public String getName() {
+		return name;
 	}
 
-	public void setcountryName(String countryName) {
-		this.countryName = countryName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

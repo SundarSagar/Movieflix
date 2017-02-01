@@ -36,9 +36,9 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional
 	public Country create(Country c) {
-		Country existing = repository.findByCountryName(c.getcountryName());
+		Country existing = repository.findByName(c.getName());
 		if (existing != null) {
-			throw new BadRequestException("Country with this Name already exists");
+			throw new BadRequestException("Country with this Name exists");
 		}
 		return repository.create(c);
 	}

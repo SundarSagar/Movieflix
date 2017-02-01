@@ -10,7 +10,7 @@ public interface CountryRepository {
 
 	public Country findOne(String id);
 	
-	public Country findByCountryName(String CountryName);
+	public Country findByName(String name);
 
 	public Country create(Country c);
 

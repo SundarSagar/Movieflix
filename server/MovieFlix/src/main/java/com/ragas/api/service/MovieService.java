@@ -8,7 +8,7 @@ public interface MovieService {
 
 	public List<Movie> findAll();
 
-	public Movie findOne(String title);
+	public Movie findOne(String id);
 
 	public Movie create(Movie m);
 

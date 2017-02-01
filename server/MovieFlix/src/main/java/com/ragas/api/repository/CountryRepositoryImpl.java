@@ -28,9 +28,9 @@ public class CountryRepositoryImpl implements CountryRepository {
 	}
 
 	@Override
-	public Country findByCountryName(String CountryName) {
-		TypedQuery<Country> query = em.createNamedQuery("Country.findByCountryName", Country.class);
-		query.setParameter("pCountryName", CountryName);
+	public Country findByName(String Name) {
+		TypedQuery<Country> query = em.createNamedQuery("Country.findByName", Country.class);
+		query.setParameter("pName", Name);
 
 		List<Country> Countrys = query.getResultList();
 		if (Countrys != null && Countrys.size() == 1) {

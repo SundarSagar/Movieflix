@@ -25,18 +25,18 @@ public class CountryController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "{id}")
-	public Country findOne(@PathVariable("id") String cId) {
-		return service.findOne(cId);
+	public Country findOne(@PathVariable("id") String actId) {
+		return service.findOne(actId);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Country create(@RequestBody Country c) {
-		return service.create(c);
+	public Country create(@RequestBody Country act) {
+		return service.create(act);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "{id}")
-	public Country update(@PathVariable("id") String id, @RequestBody Country c) {
-		return service.update(id, c);
+	public Country update(@PathVariable("id") String id, @RequestBody Country act) {
+		return service.update(id, act);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "{id}")

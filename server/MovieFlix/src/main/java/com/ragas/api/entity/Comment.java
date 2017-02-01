@@ -10,8 +10,8 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({ 
-	@NamedQuery(name = "Comments.findAll", query = "SELECT c FROM Comments c"),
-	@NamedQuery(name = "Comments.findByMovieId", query = "SELECT c FROM Comments c WHERE c.movieId=:pmovieId") 
+	@NamedQuery(name = "Comments.findAll", query = "SELECT c FROM Comment c"),
+	@NamedQuery(name = "Comments.findByMovieId", query = "SELECT c FROM Comment c WHERE c.movieId=:pmovieId") 
 })
 public class Comment {
 

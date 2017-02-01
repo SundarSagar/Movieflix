@@ -38,7 +38,7 @@ public class ActorServiceImpl implements ActorService {
 	public Actor create(Actor act) {
 		Actor existing = repository.findByName(act.getName());
 		if (existing != null) {
-			throw new BadRequestException("Actor with this email already exists");
+			throw new BadRequestException("Actor with this Name exists");
 		}
 		return repository.create(act);
 	}

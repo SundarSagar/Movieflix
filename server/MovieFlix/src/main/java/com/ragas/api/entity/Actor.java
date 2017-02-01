@@ -2,10 +2,8 @@ package com.ragas.api.entity;
 
 
 import java.util.List;
-//import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,13 +23,12 @@ import javax.persistence.Table;
 public class Actor {
 	
 	@Id
-	@Column(name = "actor_id")
 	private String id;
 	
 	@Column(unique=true)
 	private String name;
 	
-	@ManyToMany(mappedBy = "actors",cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "actors")
 	 private List<Movie> movies;
 	
 	public Actor() {

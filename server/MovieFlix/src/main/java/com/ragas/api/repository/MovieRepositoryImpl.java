@@ -29,7 +29,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 	
 	@Override
 	public Movie findByTitle(String title) {
-		TypedQuery<Movie> query = em.createNamedQuery("Movie.findByEmail", Movie.class);
+		TypedQuery<Movie> query = em.createNamedQuery("Movie.findByTitle", Movie.class);
 		query.setParameter("pTitle", title);
 
 		List<Movie> movies = query.getResultList();

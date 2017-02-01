@@ -1,10 +1,12 @@
 package com.ragas.api.entity;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -21,6 +23,9 @@ public class Genre {
 	
 	@Column(unique=true)
 	private String genreName;
+	
+	@ManyToMany(mappedBy="genres")
+	private List<Movie> movies;
 
 	public String getId() {
 		return id;
@@ -40,6 +45,14 @@ public class Genre {
 
 	public void setGenreName(String genreName) {
 		this.genreName = genreName;
+	}
+
+	public List<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
 	}
 
 }

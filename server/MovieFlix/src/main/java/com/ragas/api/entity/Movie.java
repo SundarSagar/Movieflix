@@ -2,35 +2,27 @@ package com.ragas.api.entity;
 
 
 import java.util.List;
-//import java.util.Set;
 import java.util.UUID;
-import com.ragas.api.entity.Actor;
 
 import javax.persistence.CascadeType;
-//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
-
-
-import javax.persistence.ManyToMany;
 
 
 @Entity
-@Table
 @NamedQueries({ 
-	@NamedQuery(name = "Movie.findAll", query = "SELECT m FROM Movie m") 
+	@NamedQuery(name = "Movie.findAll", query = "SELECT m FROM Movie m"),
+	@NamedQuery(name = "Movie.findByTitle", query = "SELECT m FROM Movie m WHERE m.title=:pTitle") 
 })
 public class Movie {
 
 	@Id
-	@Column(name = "Movie_id")
 	private String id;
 	
 	@Column(unique=true)
@@ -44,21 +36,44 @@ public class Movie {
 	
 	private String runTime;
 	
-	private String genre;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+	      name="Movie_Genre",
+	      joinColumns=@JoinColumn(name="Movie_Id", referencedColumnName="id"),
+	      inverseJoinColumns=@JoinColumn(name="Genre_Id", referencedColumnName="id"))
+	private List<Genre> genres;
 	
 	private String director;
 	
-	private String writer;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+	      name="Movie_Writer",
+	      joinColumns=@JoinColumn(name="id", referencedColumnName="id"),
+	      inverseJoinColumns=@JoinColumn(name="Writer_Id", referencedColumnName="id"))
+	private List<Writer> writers;
 	
-
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+	      name="Movie_Actors",
+	      joinColumns=@JoinColumn(name="id", referencedColumnName="id"),
+	      inverseJoinColumns=@JoinColumn(name="Actor_Id", referencedColumnName="id"))
 	private List<Actor> actors;
 	
 	private String plot;
 	
-	private String language;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+	      name="Movie_Language",
+	      joinColumns=@JoinColumn(name="id", referencedColumnName="id"),
+	      inverseJoinColumns=@JoinColumn(name="Language_Id", referencedColumnName="id"))
+	private List<Language> languages;
 	
-	private String country;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+	      name="Movie_Country",
+	      joinColumns=@JoinColumn(name="id", referencedColumnName="id"),
+	      inverseJoinColumns=@JoinColumn(name="Country_Id", referencedColumnName="id"))
+	private List<Country> countrys;
 	
 	private String awards;
 	
@@ -93,8 +108,7 @@ public class Movie {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-    @ManyToMany
-    @JoinTable(name = "movie_actor", joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "movie_id"), inverseJoinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "actor_id"))
+    
     public List<Actor> getActors() {
         return actors;
     }
@@ -135,14 +149,6 @@ public class Movie {
 		this.runTime = runTime;
 	}
 
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-
 	public String getDirector() {
 		return director;
 	}
@@ -151,36 +157,12 @@ public class Movie {
 		this.director = director;
 	}
 
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
 	public String getPlot() {
 		return plot;
 	}
 
 	public void setPlot(String plot) {
 		this.plot = plot;
-	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 	public String getAwards() {
@@ -237,6 +219,38 @@ public class Movie {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public List<Language> getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(List<Language> languages) {
+		this.languages = languages;
+	}
+
+	public List<Writer> getWriters() {
+		return writers;
+	}
+
+	public void setWriters(List<Writer> writers) {
+		this.writers = writers;
+	}
+
+	public List<Country> getCountrys() {
+		return countrys;
+	}
+
+	public void setCountrys(List<Country> countrys) {
+		this.countrys = countrys;
 	}
 
 }

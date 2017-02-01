@@ -26,9 +26,9 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Movie findOne(String title) {
+	public Movie findOne(String id) {
 		
-		Movie M = repository.findOne(title);
+		Movie M = repository.findOne(id);
 		if (M == null) {
 			throw new EntityNotFoundException("Movie not found");
 		}
@@ -38,7 +38,7 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	@Transactional
 	public Movie create(Movie m) {
-		Movie existing = repository.findOne(m.getTitle());
+		Movie existing = repository.findByTitle(m.getTitle());
 		if (existing != null) {
 			throw new BadRequestException("Movie with this title already exists");
 		}
